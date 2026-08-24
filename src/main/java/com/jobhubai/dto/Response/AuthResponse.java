@@ -1,5 +1,6 @@
 package com.jobhubai.dto.Response;
 
+import com.jobhubai.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,4 +12,7 @@ public class AuthResponse {
     private String name;
     private String email;
     private String role;
+
+    public AuthResponse(String token, String name, String email, Role role) {
+    }
 }

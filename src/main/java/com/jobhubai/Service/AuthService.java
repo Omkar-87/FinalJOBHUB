@@ -7,6 +7,7 @@ import com.jobhubai.dto.Request.ResetPass;
 import com.jobhubai.dto.Response.AuthResponse;
 import com.jobhubai.entity.ResetPassword;
 import com.jobhubai.entity.User;
+import com.jobhubai.enums.Role;
 import com.jobhubai.exception.DuplicateException;
 import com.jobhubai.exception.NoAcessException;
 import com.jobhubai.mapper.toUserEntity;
@@ -55,7 +56,7 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest registerRequest) {
 
-        if (registerRequest.getRole().equals("ADMIN")) {
+        if (registerRequest.getRole()== Role.ADMIN) {
             throw new NoAcessException("Aukat me rahe Bhadwe");
         }
 
@@ -65,14 +66,14 @@ public class AuthService {
 
         User user = toUserEntity.toUser(registerRequest);
 
-        if (registerRequest.getRole().equals("EMPLOYEE")) {
+        if (registerRequest.getRole()==Role.EMPLOYEE) {
 
             user.setRole(registerRequest.getRole());
             user.setExperience(registerRequest.getExperience());
 
         }
 
-        if (registerRequest.getRole().equals("EMPLOYER")) {
+        if (registerRequest.getRole()==Role.EMPLOYER) {
 
             user.setRole(registerRequest.getRole());
             user.setName(registerRequest.getName());

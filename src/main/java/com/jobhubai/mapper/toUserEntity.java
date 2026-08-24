@@ -3,6 +3,7 @@ package com.jobhubai.mapper;
 import com.jobhubai.dto.Request.RegisterRequest;
 import com.jobhubai.entity.Company;
 import com.jobhubai.entity.User;
+import com.jobhubai.enums.Role;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,7 @@ public class toUserEntity {
 
         user.setRole(request.getRole());
 
-        if ("EMPLOYER".equals(request.getRole())) {
+        if ("EMPLOYER".equals(request.getRole()== Role.EMPLOYER)) {
 
             Company company = new Company();
 

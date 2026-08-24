@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface JobRepo extends JpaRepository<Job,Long> {
 
 
-    List<Job> findByCompany(Optional<Company> company);
+    List<Job> findByCompany(Company company);
 }

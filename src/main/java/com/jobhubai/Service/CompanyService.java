@@ -30,7 +30,7 @@ public class CompanyService {
     final
     UserRepo repo;
     private final CompanyRepo companyRepo;
-    CompanyRepo rep;
+
     private final toCompanyResponse toCompanyResponse;
     final
     toCompanyEntity companyEntity;
@@ -53,7 +53,7 @@ public class CompanyService {
         {
             throw new NotFound("User not found");
         }
-        if(rep.existsByname(companyDetails.getName()))
+        if(companyRepo.existsByname(companyDetails.getName()))
         {
             throw new DuplicateException("Company already exists");
         }
@@ -65,7 +65,7 @@ public class CompanyService {
         company.setNetWorth(companyDetails.getNetWorth());
         company.setWebsite(companyDetails.getWebsite());
         company.setUser(user);
-        rep.save(company);
+        companyRepo.save(company);
         user.setCompany(company);
         repo.save(user);
 
@@ -122,19 +122,21 @@ public class CompanyService {
 
 
     public List<JobResponse> findJobs(Long id) {
-        Optional<Company>company=rep.findById(id);
-        if (company.isEmpty()) {
+        Optional<Company> companyOpt = companyRepo.findById(id);
+        if (companyOpt.isEmpty()) {
             throw new NotFound("Company not found");
         }
-        List<JobResponse>jobs=new ArrayList<>();
-        
-       List<Job> job= jobRepo.findByCompany(company);
+        Company company = companyOpt.get();
+        List<JobResponse> jobs = new ArrayList<>();
+
+        List<Job> job = jobRepo.findByCompany(company);
         for(Job jobss:job)
         {
             jobs.add(toJobResponseMapper.toResponse(jobss));
         }
         return jobs;
     }
-}
+    }
+
 
 

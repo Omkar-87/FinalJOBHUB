@@ -1,5 +1,6 @@
 package com.jobhubai.dto.Request;
 
+import com.jobhubai.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class RegisterRequest {
     @NotBlank
     private String password;
 
-    private String role;
+    private Role role;
 
     private Integer experience;
 
