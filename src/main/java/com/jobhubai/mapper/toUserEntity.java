@@ -27,7 +27,7 @@ public class toUserEntity {
 
         user.setRole(request.getRole());
 
-        if ("EMPLOYER".equals(request.getRole()== Role.EMPLOYER)) {
+        if (request.getRole() == Role.EMPLOYER) {
 
             Company company = new Company();
 

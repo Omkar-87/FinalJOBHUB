@@ -11,8 +11,7 @@ public class AuthResponse {
     private String token;
     private String name;
     private String email;
-    private String role;
+    private Role role;
 
-    public AuthResponse(String token, String name, String email, Role role) {
-    }
+
 }
