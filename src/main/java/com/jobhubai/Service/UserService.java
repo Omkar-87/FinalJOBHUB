@@ -34,14 +34,14 @@ public class UserService {
             String username,
             UpdateProfile updatedProfile) {
 
-        User user = repo.findByName(username);
+        User user = repo.findByUsername(username);
 
         if (user == null) {
             throw new NotFound("User not found");
         }
 
         if (updatedProfile.getName() != null) {
-            user.setName(updatedProfile.getName());
+            user.setUsername(updatedProfile.getName());
         }
 
         if (updatedProfile.getEmail() != null) {

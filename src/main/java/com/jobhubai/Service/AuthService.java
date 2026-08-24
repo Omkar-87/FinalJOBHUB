@@ -76,10 +76,10 @@ public class AuthService {
         if (registerRequest.getRole()==Role.EMPLOYER) {
 
             user.setRole(registerRequest.getRole());
-            user.setName(registerRequest.getName());
+            user.setUsername(registerRequest.getUsername());
 
             user.getCompany().setName(
-                    registerRequest.getName()
+                    registerRequest.getUsername()
             );
 
             user.getCompany().setDescription(
@@ -93,7 +93,7 @@ public class AuthService {
 
         repo.save(user);
 
-        return sendData(registerRequest.getName());
+        return sendData(registerRequest.getUsername());
     }
 
 
@@ -130,7 +130,7 @@ public class AuthService {
     public AuthResponse sendData(String username) {
 
         User user =
-                repo.findByName(username);
+                repo.findByUsername(username);
 
         String token =
                 Jwt.generateToken(username);
@@ -138,7 +138,7 @@ public class AuthService {
         AuthResponse authResponse =
                 new AuthResponse(
                         token,
-                        user.getName(),
+                        user.getUsername(),
                         user.getEmail(),
                         user.getRole()
                 );

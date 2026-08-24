@@ -47,7 +47,7 @@ public class ResumeService {
         String fileName =
                 UUID.randomUUID().toString() + "." + extension;
 
-        User user = repo.findByName(userName);
+        User user = repo.findByUsername(userName);
 
         if (user == null) {
             throw new NotFound("User not found");
@@ -102,7 +102,7 @@ public class ResumeService {
             MultipartFile file,
             String userName) throws IOException {
 
-        User user = repo.findByName(userName);
+        User user = repo.findByUsername(userName);
 
         if (user == null) {
             throw new NotFound("User not found");
@@ -130,7 +130,7 @@ public class ResumeService {
     public void deleteResume(String name)
             throws IOException {
 
-        User user = repo.findByName(name);
+        User user = repo.findByUsername(name);
 
         if (user == null) {
             throw new NotFound("User not found");

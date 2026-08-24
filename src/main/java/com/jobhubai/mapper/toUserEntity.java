@@ -17,7 +17,7 @@ public class toUserEntity {
 
         User user = new User();
 
-        user.setName(request.getName());
+        user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
 
 
@@ -27,16 +27,7 @@ public class toUserEntity {
 
         user.setRole(request.getRole());
 
-        if (request.getRole() == Role.EMPLOYER) {
 
-            Company company = new Company();
-
-            company.setName(request.getName());
-            company.setDescription(request.getDescription());
-            company.setNetWorth(request.getNetWorth());
-
-            user.setCompany(company);
-        }
 
         return user;
     }
