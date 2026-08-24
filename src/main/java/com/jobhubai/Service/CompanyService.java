@@ -47,7 +47,7 @@ public class CompanyService {
     }
 
     public void createCompany(@Valid CompanyDetails companyDetails,String username) {
-        User user=repo.findByusername(username);
+        User user=repo.findByName(username);
 
         if(user==null)
         {
@@ -99,7 +99,7 @@ public class CompanyService {
 
     public void updateCompany(UpdateCompanyDetails companyDetails, String username) {
 
-        User user = repo.findByusername(username);
+        User user = repo.findByName(username);
 
         if (user == null) {
             throw new NotFound("User not found");

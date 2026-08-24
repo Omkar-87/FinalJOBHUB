@@ -19,7 +19,7 @@ public class toUserEntity {
 
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setUsername(request.getEmail());
+
 
         user.setPassword(
                 encoder.encode(request.getPassword())

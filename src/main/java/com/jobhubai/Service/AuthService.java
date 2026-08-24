@@ -130,7 +130,7 @@ public class AuthService {
     public AuthResponse sendData(String username) {
 
         User user =
-                repo.findByusername(username);
+                repo.findByName(username);
 
         String token =
                 Jwt.generateToken(username);

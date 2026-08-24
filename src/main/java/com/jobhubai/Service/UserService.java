@@ -34,7 +34,7 @@ public class UserService {
             String username,
             UpdateProfile updatedProfile) {
 
-        User user = repo.findByusername(username);
+        User user = repo.findByName(username);
 
         if (user == null) {
             throw new NotFound("User not found");
