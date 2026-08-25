@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -25,4 +27,6 @@ public class Company extends Auditable{
     private String location;
     @OneToOne(mappedBy = "company")
     User user;
+    @OneToMany(mappedBy = "company")
+    List<Job> job;
 }
