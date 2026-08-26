@@ -7,6 +7,7 @@ import com.jobhubai.entity.Company;
 import com.jobhubai.entity.Job;
 import com.jobhubai.enums.JobStatus;
 import com.jobhubai.enums.JobType;
+import com.jobhubai.enums.workMode;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +32,9 @@ public class JobsController {
          return jobService.createJobs(jobDetails,authentication.getName());
     }
     @GetMapping
-    public List<JobResponse> getJob(@Valid@RequestParam(required = false) String keyWord, @RequestParam(required = false) String title, @RequestParam(required = false) String description, @RequestParam(required = false) Long salaryMin, @RequestParam(required = false) Long SalaryMax, @RequestParam(required = false) String Location, @RequestParam(required = false)JobType jobType, @RequestParam(required = false) Integer experience, @RequestParam(required = false)Company company)
+    public List<JobResponse> getJob(@Valid@RequestParam(required = false) String keyWord, @RequestParam(required = false) String title, @RequestParam(required = false) String description, @RequestParam(required = false) Long salaryMin, @RequestParam(required = false) Long SalaryMax, @RequestParam(required = false) String Location, @RequestParam(required = false)JobType jobType, @RequestParam(required = false) Integer experience, @RequestParam(required = false)Company company,@RequestParam(required = false) workMode workMode,@RequestParam(required = false)String skill)
     {
-        return  jobService.findJobs(keyWord,title,description,salaryMin,SalaryMax,Location,jobType,experience,company);
+        return  jobService.findJobs(keyWord,title,description,salaryMin,SalaryMax,Location,jobType,experience,company,workMode,skill);
     }
 
 

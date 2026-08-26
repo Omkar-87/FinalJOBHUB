@@ -5,6 +5,8 @@ import com.jobhubai.enums.JobType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "jobs")
 @Getter
@@ -51,4 +53,12 @@ public class Job extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "posted_by")
     private User postedBy;
+    @ElementCollection
+    private List<String> skills;
+    @ElementCollection
+    private List<String> requiredSkills;
+    @ElementCollection
+    private List<String> preferredSkills;
+    private String qualifications;
+
 }

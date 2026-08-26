@@ -9,10 +9,12 @@ import com.jobhubai.entity.Company;
 import com.jobhubai.entity.Job;
 import com.jobhubai.entity.User;
 import com.jobhubai.enums.JobType;
+import com.jobhubai.enums.workMode;
 import com.jobhubai.exception.NotFound;
 import com.jobhubai.mapper.toJobResponseMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,14 +33,17 @@ public class JobService {
     toJobResponseMapper toJobResponseMapper;
     final
     JobRepo jobRepo;
+    final
+    JOBspecification JobSpecification;
 
 
 
-    public JobService(UserRepo repo, CompanyRepo companyRepo, toJobResponseMapper toJobResponseMapper, JobRepo jobRepo) {
+    public JobService(UserRepo repo, CompanyRepo companyRepo, toJobResponseMapper toJobResponseMapper, JobRepo jobRepo, JOBspecification JobSpecification) {
         this.repo = repo;
         this.companyRepo = companyRepo;
         this.toJobResponseMapper = toJobResponseMapper;
         this.jobRepo = jobRepo;
+        this.JobSpecification = JobSpecification;
     }
 
     public JobResponse createJobs(JobDetails jobDetails, String name) {
@@ -63,7 +68,40 @@ public class JobService {
 
     }
 
-    public List<JobResponse> findJobs(@Valid String keyWord, String title, String description, Long salaryMin, Long salaryMax, String location, JobType jobType, Integer experience, Company company) {
+
+    public List<JobResponse> findJobs(@Valid String keyWord, String title, String description, Long salaryMin, Long salaryMax, String location, JobType jobType, Integer experience, Company company, workMode workMode, String skill) {
+        Specification<Job> spec=Specification.where(null);
+        if(keyWord!=null&&!keyWord.isBlank())
+        {
+            spec=spec.and(JobSpecification.Keyword(keyWord));
+        }
+
+        if(salaryMax!=null&&!salaryMax.describeConstable().isEmpty())
+        {
+            spec=spec.and(JobSpecification.SalaryMax(salaryMax));
+        }
+        if(salaryMin!=null&&!salaryMin.describeConstable().isEmpty())
+        {
+            spec=spec.and(JobSpecification.SalaryMin(salaryMin));
+        }
+
+        if(jobType!=null)
+        {
+            spec=spec.and(JobSpecification.JobType(jobType));
+        }
+        if(experience!=null)
+        {
+            spec=spec.and(JobSpecification.Experience(experience));
+        }
+
+        if(workMode!=null)
+        {
+            spec=spec.and(JobSpecification.WorkMode(workMode));
+        }
+        if(skill!=null&&!skill.isBlank())
+        {
+            spec=spec.and(JobSpecification.Skill(skill));
+        }
 
     }
 }
