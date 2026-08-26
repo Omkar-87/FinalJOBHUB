@@ -12,5 +12,8 @@ public interface JobRepo extends JpaRepository<Job,Long>, JpaSpecificationExecut
 
 
     List<Job> findByCompany(Company company);
-    List<Job> findByTitleContainingIgnoreCaseOrfindBy
+
+
+    Job getById(Long id);
+
 }

@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class JOBspecification {
     Specification<Job> specification;
@@ -92,4 +94,9 @@ public class JOBspecification {
     }
 
 
+    public Specification<Job> timeStamp(Integer datePosted) {
+        LocalDateTime currentTime=LocalDateTime.now().minusHours(datePosted);
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.greaterThan(root.get("createdAt"),currentTime);
+    }
 }

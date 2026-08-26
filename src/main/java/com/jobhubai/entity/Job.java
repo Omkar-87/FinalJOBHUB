@@ -59,6 +59,6 @@ public class Job extends Auditable {
     private List<String> requiredSkills;
     @ElementCollection
     private List<String> preferredSkills;
-    private String qualifications;
+    private List<String> qualifications;
 
 }

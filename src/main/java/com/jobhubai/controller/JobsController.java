@@ -32,9 +32,19 @@ public class JobsController {
          return jobService.createJobs(jobDetails,authentication.getName());
     }
     @GetMapping
-    public List<JobResponse> getJob(@Valid@RequestParam(required = false) String keyWord, @RequestParam(required = false) String title, @RequestParam(required = false) String description, @RequestParam(required = false) Long salaryMin, @RequestParam(required = false) Long SalaryMax, @RequestParam(required = false) String Location, @RequestParam(required = false)JobType jobType, @RequestParam(required = false) Integer experience, @RequestParam(required = false)Company company,@RequestParam(required = false) workMode workMode,@RequestParam(required = false)String skill)
+    public List<JobResponse> getJob(@Valid@RequestParam(required = false) String keyWord, @RequestParam(required = false) String title, @RequestParam(required = false) String description, @RequestParam(required = false) Long salaryMin, @RequestParam(required = false) Long SalaryMax, @RequestParam(required = false) String Location, @RequestParam(required = false)JobType jobType, @RequestParam(required = false) Integer experience, @RequestParam(required = false)Company company,@RequestParam(required = false) workMode workMode,@RequestParam(required = false)String skill,@RequestParam(required = false)Integer datePosted)
     {
-        return  jobService.findJobs(keyWord,title,description,salaryMin,SalaryMax,Location,jobType,experience,company,workMode,skill);
+        return  jobService.findJobs(keyWord,title,description,salaryMin,SalaryMax,Location,jobType,experience,company,workMode,skill,datePosted);
+    }
+    @GetMapping("{id}")
+    public JobResponse getIndividualJob(@Valid@RequestParam Long id)
+    {
+        return  jobService.findIndividualJob(id);
+    }
+    @PutMapping("{id}")
+    public JobResponse updateJob(Authentication authentication,JobDetails jobDetails,Long id)
+    {
+        return jobService.updateJob(authentication.getName(),jobDetails,id);
     }
 
 
