@@ -129,11 +129,12 @@ public class JobService {
         {
             throw new NotFound("User not found");
         }
-        Job job=jobRepo.getById(id);
-        if(job==null)
+        Optional<Job> job1=jobRepo.findById(id);
+        if(job1.isEmpty())
         {
             throw new NotFound("Job not found");
         }
+        Job job=job1.get();
         if(!job.getCreatedBy().equals(name))
         {
             throw new NoAcessException("Cannot be Acessed");

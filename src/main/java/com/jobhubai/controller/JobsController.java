@@ -36,12 +36,12 @@ public class JobsController {
     {
         return  jobService.findJobs(keyWord,title,description,salaryMin,SalaryMax,Location,jobType,experience,company,workMode,skill,datePosted);
     }
-    @GetMapping("{id}")
-    public JobResponse getIndividualJob(@Valid@RequestParam Long id)
+    @GetMapping("/{id}")
+    public JobResponse getIndividualJob(@PathVariable Long id)
     {
         return  jobService.findIndividualJob(id);
     }
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public JobResponse updateJob(Authentication authentication,JobDetails jobDetails,Long id)
     {
         return jobService.updateJob(authentication.getName(),jobDetails,id);
